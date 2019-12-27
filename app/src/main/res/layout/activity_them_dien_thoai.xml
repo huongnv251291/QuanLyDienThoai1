@@ -3,114 +3,108 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-   <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-       android:layout_width="match_parent"
-       android:layout_height="match_parent"
-       android:background="#fff"
-       android:orientation="vertical">
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#fff"
+        android:orientation="vertical">
 
-      <TextView
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
-          android:layout_marginLeft="8dp"
-          android:layout_marginTop="8dp"
-          android:layout_marginRight="8dp"
-          android:layout_marginBottom="4dp"
-          android:text="Mã"
-          android:textSize="16sp" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginBottom="4dp"
+            android:text="Mã"
+            android:textSize="16sp" />
 
-      <EditText
-          android:id="@+id/edtMa"
-          android:layout_width="match_parent"
-          android:layout_height="wrap_content"
-          android:layout_margin="8dp"
-          android:padding="8dp"
-          android:text=""
-          android:hint="Mã điện thoại"/>
+        <EditText
+            android:id="@+id/edtMa"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:padding="8dp"
+            android:text="" />
 
-      <TextView
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
-          android:layout_marginLeft="8dp"
-          android:layout_marginTop="8dp"
-          android:layout_marginRight="8dp"
-          android:layout_marginBottom="4dp"
-          android:text="Tên điện thoại"
-          android:textSize="16sp" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginBottom="4dp"
+            android:text="Tên điện thoại"
+            android:textSize="16sp" />
 
-      <EditText
-          android:id="@+id/edtTen"
-          android:layout_width="match_parent"
-          android:layout_height="wrap_content"
-          android:layout_margin="8dp"
-          android:padding="8dp"
-          android:hint="Tên điện thoại" />
+        <EditText
+            android:id="@+id/edtTen"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:padding="8dp" />
 
-      <TextView
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
-          android:layout_marginLeft="8dp"
-          android:layout_marginTop="8dp"
-          android:layout_marginRight="8dp"
-          android:layout_marginBottom="4dp"
-          android:text="Kích thước"
-          android:textSize="16sp" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginBottom="4dp"
+            android:text="Kích thước"
+            android:textSize="16sp" />
 
-      <EditText
-          android:id="@+id/edtKichThuoc"
-          android:layout_width="match_parent"
-          android:layout_height="wrap_content"
-          android:layout_margin="8dp"
-          android:padding="8dp"
-          android:hint="Kích thước" />
+        <EditText
+            android:id="@+id/edtKichThuoc"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:padding="8dp" />
 
-      <TextView
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
-          android:layout_marginLeft="8dp"
-          android:layout_marginTop="8dp"
-          android:layout_marginRight="8dp"
-          android:layout_marginBottom="4dp"
-          android:text="Đánh giá"
-          android:textSize="16sp" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginBottom="4dp"
+            android:text="Đánh giá"
+            android:textSize="16sp" />
 
-      <EditText
-          android:id="@+id/edtDanhGia"
-          android:layout_width="match_parent"
-          android:layout_height="wrap_content"
-          android:layout_margin="8dp"
-          android:padding="8dp"
-          android:hint="Đánh giá" />
+        <EditText
+            android:id="@+id/edtDanhGia"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:padding="8dp" />
 
-      <TextView
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
-          android:layout_marginLeft="8dp"
-          android:layout_marginTop="8dp"
-          android:layout_marginRight="8dp"
-          android:layout_marginBottom="4dp"
-          android:text="ID hãng sản xuất"
-          android:textSize="16sp" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginBottom="4dp"
+            android:text="ID hãng sản xuất"
+            android:textSize="16sp" />
 
-      <EditText
-          android:id="@+id/edtHangSanXuat"
-          android:layout_width="match_parent"
-          android:layout_height="wrap_content"
-          android:layout_margin="8dp"
-          android:inputType="numberDecimal"
-          android:padding="8dp"
-          android:hint="ID hãng sản xuất" />
+        <EditText
+            android:id="@+id/edtHangSanXuat"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:inputType="numberDecimal"
+            android:padding="8dp" />
 
+        <Button
+            android:id="@+id/btnThem"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="8dp"
+            android:layout_weight="1"
+            android:text="Thêm"
+            android:textSize="16sp" />
 
-      <Button
-          android:id="@+id/btnThem"
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
-          android:layout_gravity="center_horizontal"
-          android:layout_marginTop="8dp"
-          android:layout_weight="1"
-          android:text="Thêm"
-          android:textSize="16sp" />
-
-   </LinearLayout>
+    </LinearLayout>
 </ScrollView>
