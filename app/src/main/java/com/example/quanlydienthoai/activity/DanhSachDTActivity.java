@@ -41,7 +41,7 @@ public class DanhSachDTActivity extends AppCompatActivity implements View.OnClic
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         lvDienThoai = findViewById(R.id.lvDienThoai);
         swLamMoi = findViewById(R.id.swLamMoi);
-        btThem = findViewById(R.id.btThem);
+        btThem = findViewById(R.id.btnThem);
         btThem.setOnClickListener(this);
         ntTimKiem = findViewById(R.id.btTimKiem);
         ntTimKiem.setOnClickListener(this);

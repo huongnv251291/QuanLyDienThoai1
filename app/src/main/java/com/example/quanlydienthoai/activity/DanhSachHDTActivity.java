@@ -38,7 +38,7 @@ public class DanhSachHDTActivity extends AppCompatActivity implements View.OnCli
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         lvHangDienThoai = findViewById(R.id.lvHangDienThoai);
         swLamMoi = findViewById(R.id.swLamMoi);
-        btThem = findViewById(R.id.btThem);
+        btThem = findViewById(R.id.btnThem);
         btThem.setOnClickListener(this);
         swLamMoi.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
@@ -69,7 +69,7 @@ public class DanhSachHDTActivity extends AppCompatActivity implements View.OnCli
     @Override
     public void onClick(View v) {
         switch (v.getId()){
-            case R.id.btThem:
+            case R.id.btnThem:
                 Intent intent = new Intent(this, ThemHangActivity.class);
                 startActivityForResult(intent, REQUEST_CODE_FOR_RESULT);
                 break;
