@@ -44,4 +44,12 @@
        android:layout_alignParentRight="true"
        android:layout_margin="6dp"
        android:src="@drawable/ic_delete_forever_red_400_24dp" />
+   <ImageView
+       android:id="@+id/ivsua"
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content"
+       android:layout_alignParentRight="true"
+       android:layout_below="@+id/ivxoa"
+       android:layout_margin="6dp"
+       android:src="@drawable/ic_edit" />
 </RelativeLayout>

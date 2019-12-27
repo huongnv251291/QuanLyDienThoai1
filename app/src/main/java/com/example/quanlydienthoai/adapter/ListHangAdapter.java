@@ -13,7 +13,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.quanlydienthoai.DienThoai;
 import com.example.quanlydienthoai.HangDienThoai;
 import com.example.quanlydienthoai.R;
 import com.example.quanlydienthoai.TuongTacDatabase;
@@ -22,7 +21,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ListHangAdapter extends ArrayAdapter<HangDienThoai> {
-
+    private View.OnClickListener onClickListener;
     public void updateHangDienThoaiList(List<HangDienThoai> hangList) {
         if(mHangDienThoaiList==null)
         {
@@ -69,6 +68,7 @@ public class ListHangAdapter extends ArrayAdapter<HangDienThoai> {
         TextView tvMa = view.findViewById(R.id.tvma);
         TextView tvMota = view.findViewById(R.id.tvmota);
         ImageView ivXoa = view.findViewById(R.id.ivxoa);
+        ImageView ivSua = view.findViewById(R.id.ivsua);
 
         //getting the hero of the specified position
         final HangDienThoai hangDienThoai = mHangDienThoaiList.get(position);
@@ -84,16 +84,28 @@ public class ListHangAdapter extends ArrayAdapter<HangDienThoai> {
             public void onClick(View view) {
                 //we will call this method to remove the selected value from the list
                 //we are passing the position which is to be removed in the method
-                xoaHangDienThoai(position, hangDienThoai);
+                if(onClickListener!=null){
+                    view.setTag(hangDienThoai);
+                    onClickListener.onClick(view);
+                }
+//                xoaHangDienThoai(position, hangDienThoai);
             }
         });
-
+        ivSua.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(onClickListener!=null){
+                    view.setTag(hangDienThoai);
+                    onClickListener.onClick(view);
+                }
+            }
+        });
         //finally returning the view
         return view;
     }
 
     //this method will remove the item from the list
-    private void xoaHangDienThoai(final int position, final HangDienThoai hangDienThoai) {
+    public void xoaHangDienThoai( final HangDienThoai hangDienThoai) {
         //Creating an alert dialog to confirm the deletion
         AlertDialog.Builder builder = new AlertDialog.Builder(context);
         builder.setTitle("Are you sure you want to delete this?");
@@ -106,7 +118,7 @@ public class ListHangAdapter extends ArrayAdapter<HangDienThoai> {
                 //removing the item
                 int soBanGhi = xoaHangDienThoaiDB(hangDienThoai);
                 if (soBanGhi > 0) {
-                    mHangDienThoaiList.remove(position);
+                    mHangDienThoaiList.remove(hangDienThoai);
                     Toast.makeText(context, "Xóa thành công", Toast.LENGTH_SHORT).show();
                     notifyDataSetChanged();
                 } else {
@@ -133,5 +145,9 @@ public class ListHangAdapter extends ArrayAdapter<HangDienThoai> {
         int soBanGhi = mTuongTacDatabase.xoaDT(hangDienThoai.getId());
 
         return soBanGhi;
+    }
+
+    public void setOnClickListener(View.OnClickListener onClickListener) {
+        this.onClickListener = onClickListener;
     }
 }

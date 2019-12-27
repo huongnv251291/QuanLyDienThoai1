@@ -10,10 +10,14 @@
        android:supportsRtl="true"
        android:theme="@style/AppTheme">
       <activity android:name=".activity.DanhSachDTActivity"></activity>
+      <activity android:name=".activity.SuaDienThoaiActivity"></activity>
+      <activity android:name=".activity.TimKiemDienThoaiActivity"></activity>
       <activity android:name=".activity.ThemDienThoaiActivity" />
       <activity android:name=".activity.DanhSachHDTActivity"/>
       <activity android:name=".activity.ThemHangActivity"/>
+      <activity android:name=".activity.SuaHangActivity"/>
       <activity android:name=".activity.MainActivity">
+
 
          <intent-filter>
             <action android:name="android.intent.action.MAIN" />

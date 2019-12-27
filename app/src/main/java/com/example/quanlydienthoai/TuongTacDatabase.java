@@ -4,14 +4,14 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+
 import java.util.ArrayList;
 
 import static android.database.sqlite.SQLiteDatabase.CONFLICT_REPLACE;
-import static com.example.quanlydienthoai.Database.COLUMN_HANGSANXUAT;
 
 public class TuongTacDatabase {
-   private Database database;
-   private SQLiteDatabase sqLiteDatabase;
+    private Database database;
+    private SQLiteDatabase sqLiteDatabase;
 
     public TuongTacDatabase(Context context) {
         database = new Database(context);
@@ -39,8 +39,8 @@ public class TuongTacDatabase {
         cv.put(Database.COLUMN_KICHTHUOC, dt.getKichthuoc());
 
         long id =
-            sqLiteDatabase.insertWithOnConflict(Database.TABLE_DIEN_THOAI, null, cv,
-                    SQLiteDatabase.CONFLICT_REPLACE);
+                sqLiteDatabase.insertWithOnConflict(Database.TABLE_DIEN_THOAI, null, cv,
+                        SQLiteDatabase.CONFLICT_REPLACE);
 
         closeConnection();
 
@@ -49,6 +49,7 @@ public class TuongTacDatabase {
 
     //// ham sua dien thoai trong bang
     public long suaDT(DienThoai dt) {
+        openConnection();
         ContentValues cv = new ContentValues();
 
         cv.put(Database.COLUMN_MA, dt.getMa());
@@ -56,17 +57,18 @@ public class TuongTacDatabase {
         cv.put(Database.COLUMN_HANGSANXUAT, dt.getHangsanxuat());
         cv.put(Database.COLUMN_DANHGIA, dt.getDanhgia());
         cv.put(Database.COLUMN_KICHTHUOC, dt.getKichthuoc());
-
-        return sqLiteDatabase.update(Database.TABLE_DIEN_THOAI, cv,
-            Database.COLUMN_ID + "=" + dt.getId(),
-            null);
+        long id = sqLiteDatabase.update(Database.TABLE_DIEN_THOAI, cv,
+                Database.COLUMN_ID + "=" + dt.getId(),
+                null);
+        closeConnection();
+        return id;
     }
 
     //// ham xoa dien thoai trong bang
     public int xoaDT(int id) {
         openConnection();
         int banGhi = sqLiteDatabase.delete(Database.TABLE_DIEN_THOAI, Database.COLUMN_ID + "=" + id,
-            null);
+                null);
         closeConnection();
         return banGhi;
     }
@@ -75,7 +77,7 @@ public class TuongTacDatabase {
     public ArrayList<DienThoai> getAllPhone() {
         openConnection();
         Cursor cursor =
-            sqLiteDatabase.rawQuery("SELECT * FROM " + Database.TABLE_DIEN_THOAI + "", null);
+                sqLiteDatabase.rawQuery("SELECT * FROM " + Database.TABLE_DIEN_THOAI + "", null);
         ArrayList<DienThoai> arr = new ArrayList<>();
         while (cursor.moveToNext()) {
             DienThoai dt = new DienThoai();
@@ -85,7 +87,34 @@ public class TuongTacDatabase {
             dt.setTen(cursor.getString(cursor.getColumnIndex(Database.COLUMN_NAME)));
             dt.setHangsanxuat(cursor.getString(cursor.getColumnIndex(Database.COLUMN_NAME_HANG)));
             dt.setHangsanxuat_id(
-                cursor.getString(cursor.getColumnIndex(Database.COLUMN_HANGSANXUAT)));
+                    cursor.getString(cursor.getColumnIndex(Database.COLUMN_HANGSANXUAT)));
+            dt.setDanhgia(cursor.getString(cursor.getColumnIndex(Database.COLUMN_DANHGIA)));
+            dt.setKichthuoc(cursor.getString(cursor.getColumnIndex(Database.COLUMN_KICHTHUOC)));
+            arr.add(dt);
+        }
+        cursor.close();
+        closeConnection();
+        return arr;
+    }
+
+    //    cursor=db.rawQuery("SELECT * FROM "+ Contactsnew.TABLE02 + " WHERE "
+//            + Contactsnew.userid + " = " + Contactsnew.userId + " AND " + Contactsnew.TITLE +
+//            " LIKE  '"+search.getText()+"%'");
+    //// ham lay ra all phone co size nhap vao trong bang
+    public ArrayList<DienThoai> getAllPhoneBySize(String size) {
+        openConnection();
+        Cursor cursor =
+                sqLiteDatabase.rawQuery("SELECT * FROM " + Database.TABLE_DIEN_THOAI + " WHERE " + Database.COLUMN_KICHTHUOC + " like '%" + size + "%'", null);
+        ArrayList<DienThoai> arr = new ArrayList<>();
+        while (cursor.moveToNext()) {
+            DienThoai dt = new DienThoai();
+
+            dt.setId(cursor.getInt(cursor.getColumnIndex(Database.COLUMN_ID)));
+            dt.setMa(cursor.getString(cursor.getColumnIndex(Database.COLUMN_MA)));
+            dt.setTen(cursor.getString(cursor.getColumnIndex(Database.COLUMN_NAME)));
+            dt.setHangsanxuat(cursor.getString(cursor.getColumnIndex(Database.COLUMN_NAME_HANG)));
+            dt.setHangsanxuat_id(
+                    cursor.getString(cursor.getColumnIndex(Database.COLUMN_HANGSANXUAT)));
             dt.setDanhgia(cursor.getString(cursor.getColumnIndex(Database.COLUMN_DANHGIA)));
             dt.setKichthuoc(cursor.getString(cursor.getColumnIndex(Database.COLUMN_KICHTHUOC)));
             arr.add(dt);
@@ -98,31 +127,31 @@ public class TuongTacDatabase {
     public ArrayList<DienThoai> getAllPhoneAndManufactory() {
         openConnection();
         Cursor cursor =
-            sqLiteDatabase.rawQuery("SELECT * FROM "
-                + Database.TABLE_DIEN_THOAI + " a "
-                + " INNER JOIN "
-                + Database.TABLE_HANG_DIEN_THOAI + " b "
-                + " ON a.hangsanxuat_id=b.hangsanxuat_id", null);
+                sqLiteDatabase.rawQuery("SELECT * FROM "
+                        + Database.TABLE_DIEN_THOAI + " a "
+                        + " INNER JOIN "
+                        + Database.TABLE_HANG_DIEN_THOAI + " b "
+                        + " ON a.hangsanxuat_id=b.hangsanxuat_id", null);
         ArrayList<DienThoai> arr = new ArrayList<>();
-       try {
-           while (cursor.moveToNext()) {
-               DienThoai dt = new DienThoai();
+        try {
+            while (cursor.moveToNext()) {
+                DienThoai dt = new DienThoai();
 
-               dt.setId(cursor.getInt(cursor.getColumnIndex(Database.COLUMN_ID)));
-               dt.setMa(cursor.getString(cursor.getColumnIndex(Database.COLUMN_MA)));
-               dt.setTen(cursor.getString(cursor.getColumnIndex(Database.COLUMN_NAME)));
-               dt.setHangsanxuat(cursor.getString(cursor.getColumnIndex(Database.COLUMN_NAME_HANG)));
-               dt.setHangsanxuat_id(
-                       cursor.getString(cursor.getColumnIndex(Database.COLUMN_HANGSANXUAT)));
-               dt.setDanhgia(cursor.getString(cursor.getColumnIndex(Database.COLUMN_DANHGIA)));
-               dt.setKichthuoc(cursor.getString(cursor.getColumnIndex(Database.COLUMN_KICHTHUOC)));
+                dt.setId(cursor.getInt(cursor.getColumnIndex(Database.COLUMN_ID)));
+                dt.setMa(cursor.getString(cursor.getColumnIndex(Database.COLUMN_MA)));
+                dt.setTen(cursor.getString(cursor.getColumnIndex(Database.COLUMN_NAME)));
+                dt.setHangsanxuat(cursor.getString(cursor.getColumnIndex(Database.COLUMN_NAME_HANG)));
+                dt.setHangsanxuat_id(
+                        cursor.getString(cursor.getColumnIndex(Database.COLUMN_HANGSANXUAT)));
+                dt.setDanhgia(cursor.getString(cursor.getColumnIndex(Database.COLUMN_DANHGIA)));
+                dt.setKichthuoc(cursor.getString(cursor.getColumnIndex(Database.COLUMN_KICHTHUOC)));
 
-               arr.add(dt);
-           }
-       }finally {
-           cursor.close();
-           closeConnection();
-       }
+                arr.add(dt);
+            }
+        } finally {
+            cursor.close();
+            closeConnection();
+        }
 
         return arr;
     }
@@ -145,15 +174,17 @@ public class TuongTacDatabase {
 
     //// ham sua hang dien thoai trong bang
     public long suaHDT(HangDienThoai hdt) {
+        openConnection();
         ContentValues cv = new ContentValues();
 
         cv.put(Database.COLUMN_MA_HANG, hdt.getMa());
         cv.put(Database.COLUMN_NAME_HANG, hdt.getTen());
         cv.put(Database.COLUMN_MOTA, hdt.getMota());
-
-        return sqLiteDatabase.update(Database.TABLE_HANG_DIEN_THOAI, cv,
-                Database.COLUMN_ID + "=" + hdt.getId(),
+        long id = sqLiteDatabase.update(Database.TABLE_HANG_DIEN_THOAI, cv,
+                Database.COLUMN_ID_HANG + "=" + hdt.getId(),
                 null);
+        closeConnection();
+        return id;
     }
 
     //// ham xoa hang dien thoai trong bang

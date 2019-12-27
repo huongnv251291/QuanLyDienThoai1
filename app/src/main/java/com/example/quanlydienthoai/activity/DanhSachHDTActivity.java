@@ -16,6 +16,8 @@ import com.example.quanlydienthoai.adapter.ListHangAdapter;
 
 import java.util.List;
 
+import static com.example.quanlydienthoai.activity.SuaDienThoaiActivity.DATA;
+
 public class DanhSachHDTActivity extends AppCompatActivity implements View.OnClickListener {
 
     private static final int REQUEST_CODE_FOR_RESULT = 1;
@@ -55,6 +57,7 @@ public class DanhSachHDTActivity extends AppCompatActivity implements View.OnCli
 
         if (adapter == null) {
             adapter = new ListHangAdapter(this, R.layout.hangdienthoai, mHangDienThoais);
+            adapter.setOnClickListener(this);
             lvHangDienThoai.setAdapter(adapter);
         }else{
             adapter.updateHangDienThoaiList(mHangDienThoais);
@@ -65,10 +68,23 @@ public class DanhSachHDTActivity extends AppCompatActivity implements View.OnCli
 
     @Override
     public void onClick(View v) {
-        if (v.getId() == R.id.btThem) {
-            Intent intent = new Intent(this, ThemHangActivity.class);
-            startActivityForResult(intent, REQUEST_CODE_FOR_RESULT);
+        switch (v.getId()){
+            case R.id.btThem:
+                Intent intent = new Intent(this, ThemHangActivity.class);
+                startActivityForResult(intent, REQUEST_CODE_FOR_RESULT);
+                break;
+            case R.id.ivxoa:
+                HangDienThoai hangDienThoaiDelete = (HangDienThoai) v.getTag();
+                adapter.xoaHangDienThoai(hangDienThoaiDelete);
+                break;
+            case R.id.ivsua:
+                HangDienThoai hangDienThoaiSua = (HangDienThoai) v.getTag();
+                Intent suaIntent = new Intent(this, SuaHangActivity.class);
+                suaIntent.putExtra(DATA,hangDienThoaiSua);
+                startActivityForResult(suaIntent, REQUEST_CODE_FOR_RESULT);
+                break;
         }
+
     }
 
     @Override

@@ -20,7 +20,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MyListAdapter extends ArrayAdapter<DienThoai> {
-
+    private View.OnClickListener onClickListener;
 
     public void updateDienThoaiList(List<DienThoai> dienThoaiList) {
         if(mDienThoaiList==null)
@@ -70,7 +70,7 @@ public class MyListAdapter extends ArrayAdapter<DienThoai> {
         TextView tvKichThuoc = view.findViewById(R.id.tvkichthuoc);
         TextView tvHangSx = view.findViewById(R.id.tvhsx);
         ImageView ivXoa = view.findViewById(R.id.ivxoa);
-
+        ImageView ivSua = view.findViewById(R.id.ivsua);
         //getting the hero of the specified position
         final DienThoai dienThoai = mDienThoaiList.get(position);
 
@@ -86,8 +86,21 @@ public class MyListAdapter extends ArrayAdapter<DienThoai> {
             @Override
             public void onClick(View view) {
                 //we will call this method to remove the selected value from the list
-                //we are passing the position which is to be removed in the method 
-                xoaDienThoai(position, dienThoai);
+                //we are passing the position which is to be removed in the method
+                view.setTag(dienThoai);
+                if(onClickListener!=null){
+                    onClickListener.onClick(view);
+                }
+//
+            }
+        });
+        ivSua.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                view.setTag(dienThoai);
+                if(onClickListener!=null){
+                    onClickListener.onClick(view);
+                }
             }
         });
         view.setOnClickListener(new View.OnClickListener() {
@@ -101,7 +114,7 @@ public class MyListAdapter extends ArrayAdapter<DienThoai> {
     }
 
     //this method will remove the item from the list 
-    private void xoaDienThoai(final int position, final DienThoai dienThoai) {
+    public void xoaDienThoai( final DienThoai dienThoai) {
         //Creating an alert dialog to confirm the deletion
         AlertDialog.Builder builder = new AlertDialog.Builder(context);
         builder.setTitle("Are you sure you want to delete this?");
@@ -114,7 +127,7 @@ public class MyListAdapter extends ArrayAdapter<DienThoai> {
                 //removing the item 
                 int soBanGhi = xoaDienThoaiDB(dienThoai);
                 if (soBanGhi > 0) {
-                    mDienThoaiList.remove(position);
+                    mDienThoaiList.remove(dienThoai);
                     Toast.makeText(context, "Xóa thành công", Toast.LENGTH_SHORT).show();
                     notifyDataSetChanged();
                 } else {
@@ -137,9 +150,17 @@ public class MyListAdapter extends ArrayAdapter<DienThoai> {
         alertDialog.show();
     }
 
-    private int xoaDienThoaiDB(DienThoai dienThoai) {
+    public int xoaDienThoaiDB(DienThoai dienThoai) {
         int soBanGhi = mTuongTacDatabase.xoaDT(dienThoai.getId());
 
         return soBanGhi;
+    }
+
+    public void setOnClickListener(View.OnClickListener onClickListener) {
+        this.onClickListener = onClickListener;
+    }
+
+    public void suaDT(DienThoai itemSua) {
+
     }
 }

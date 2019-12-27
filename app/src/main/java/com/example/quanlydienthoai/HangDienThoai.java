@@ -1,6 +1,9 @@
 package com.example.quanlydienthoai;
 
-public class HangDienThoai {
+import android.os.Parcel;
+import android.os.Parcelable;
+
+public class HangDienThoai implements Parcelable {
     private int id;
     private String ma, ten, mota;
 
@@ -12,6 +15,25 @@ public class HangDienThoai {
 
     public HangDienThoai() {
     }
+
+    protected HangDienThoai(Parcel in) {
+        id = in.readInt();
+        ma = in.readString();
+        ten = in.readString();
+        mota = in.readString();
+    }
+
+    public static final Creator<HangDienThoai> CREATOR = new Creator<HangDienThoai>() {
+        @Override
+        public HangDienThoai createFromParcel(Parcel in) {
+            return new HangDienThoai(in);
+        }
+
+        @Override
+        public HangDienThoai[] newArray(int size) {
+            return new HangDienThoai[size];
+        }
+    };
 
     public int getId() {
         return id;
@@ -43,5 +65,18 @@ public class HangDienThoai {
 
     public void setMota(String mota) {
         this.mota = mota;
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeInt(id);
+        dest.writeString(ma);
+        dest.writeString(ten);
+        dest.writeString(mota);
     }
 }
