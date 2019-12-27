@@ -25,7 +25,8 @@
           android:layout_height="wrap_content"
           android:layout_margin="8dp"
           android:padding="8dp"
-          android:text="MA1" />
+          android:text=""
+          android:hint="Mã điện thoại"/>
 
       <TextView
           android:layout_width="wrap_content"
@@ -43,7 +44,7 @@
           android:layout_height="wrap_content"
           android:layout_margin="8dp"
           android:padding="8dp"
-          android:text="Test" />
+          android:hint="Tên điện thoại" />
 
       <TextView
           android:layout_width="wrap_content"
@@ -61,7 +62,7 @@
           android:layout_height="wrap_content"
           android:layout_margin="8dp"
           android:padding="8dp"
-          android:text="Tron" />
+          android:hint="Kích thước" />
 
       <TextView
           android:layout_width="wrap_content"
@@ -79,7 +80,7 @@
           android:layout_height="wrap_content"
           android:layout_margin="8dp"
           android:padding="8dp"
-          android:text="Good" />
+          android:hint="Đánh giá" />
 
       <TextView
           android:layout_width="wrap_content"
@@ -98,7 +99,7 @@
           android:layout_margin="8dp"
           android:inputType="numberDecimal"
           android:padding="8dp"
-          android:text="SX1" />
+          android:hint="ID hãng sản xuất" />
 
 
       <Button
