@@ -142,7 +142,7 @@ public class ListHangAdapter extends ArrayAdapter<HangDienThoai> {
     }
 
     private int xoaHangDienThoaiDB(HangDienThoai hangDienThoai) {
-        int soBanGhi = mTuongTacDatabase.xoaDT(hangDienThoai.getId());
+        int soBanGhi = mTuongTacDatabase.xoaHDT(hangDienThoai.getId());
 
         return soBanGhi;
     }
